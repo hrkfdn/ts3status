@@ -4,7 +4,7 @@ import config
 
 from ts3query import TS3Connection
 from flask import Flask, render_template, Markup
-app = Flask(__name__, instance_path="/www/flask/ts3status")
+app = Flask(__name__)
 
 t = TS3Connection(config.hostname, config.port)
 
