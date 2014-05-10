@@ -8,7 +8,7 @@ ul > li {
 }
 li {
 	position: absolute;
-	left: -1em;
+	left: 0;
 }
 li::before {
 	margin-right: .25em;
