@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{ servertitle }}</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link href="{{ url_for('static', filename='default.css') }}" rel="stylesheet">
+	<style>
+	.container {
+		max-width: 700px;
+		margin-top: 1em;
+	}
+	</style>
+</head>
+<body>
+<div class="container">
+	<div class="navbar navbar-default" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand">{{ server_title }}</a>
+		</div>
+		<a class="btn btn-primary navbar-btn navbar-right" style="margin-right: 1em;" href="ts3server://{{ display_host }}"><i class="fa fa-external-link-square"></i> Connect</a>
+	</div>
+	<div class="col-md-6">
+	{{ overview }}
+	</div>
+	<div class="col-md-6">
+		<dl class="dl-horizontal">
+			<dt>Name:</dt>
+			<dd>{{ server_title }}</dd>
+			<dt>Address:</dt>
+			<dd>{{ display_host }}</dd>
+			<dt>Version:</dt>
+			<dd>{{ server_version }} on {{ server_platform }}</dd>
+		</dl>
+	</div>
+</div>
+</body>
+</html>
