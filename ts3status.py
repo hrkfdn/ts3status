@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 
 import config
+import re
 
 from ts3query import TS3Connection
 from flask import Flask, render_template, Markup
 app = Flask(__name__)
 
 t = TS3Connection(config.hostname, config.port)
+spacer_re = re.compile(r"\[([?lcr]?)[sS]pacer[\d]*\](.*)")
 
 def connect():
 	t.connect()
@@ -28,12 +30,33 @@ def is_empty(clients):
 	return True
 
 def channel_html(chan, clientsinchannel):
-	if chan["cid"] == 0 or is_empty(clientsinchannel):
-		result = "<li class=\"chan_empty\">" + str(chan["channel_name"])
-	else:
-		result = "<li class=\"chan_populated\">" + str(chan["channel_name"])
+	global spacer_re
+	name = chan["channel_name"]
+	m = spacer_re.match(name)
 
-	return result + "\n"
+	classes = ""
+	if m is not None:
+		if m.group(1) == '':
+			name = ""
+			classes += " spacer_dashed" if m.group(2) == "---" else ""
+			classes += " spacer_dotted" if m.group(2) == "..." else ""
+			classes += " spacer_straight" if m.group(2) == "___" else ""
+
+			# catch other spacers
+			classes += " spacer_dashed" if (m.group(2) == "-.-" or m.group(2) == "-..") else ""
+		else:
+			classes += " centered" if m.group(1) == 'c' else ""
+			classes += " left" if m.group(1) == 'l' else ""
+			classes += " right" if m.group(1) == 'r' else ""
+			name = m.group(2)
+	else:
+		if chan["cid"] == 0 or is_empty(clientsinchannel):
+			classes += " chan_empty"
+		else:
+			classes += " chan_populated"
+
+	result = "<li class=\"" + classes + "\">" + name + "\n"
+	return result
 
 def client_html(client):
 	classes = "client"
