@@ -76,6 +76,9 @@ def main():
 
 	disconnect()
 
+	if channels is None or clients is None or info is None:
+		return "Connection error."
+
 	out = "<ul>\n" + generate_overview(channels.chanlist[0]["children"], clients) + "</ul>\n"
 
 	return render_template("index.html", 
