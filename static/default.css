@@ -8,6 +8,7 @@ ul > li {
 }
 li {
 	position: absolute;
+	text-align: left;
 	left: 0;
 }
 li::before {
@@ -66,4 +67,23 @@ li::before {
 }
 .icon-connect::before {
 	content: "\f14c";
+}
+
+.centered {
+	text-align: center;
+}
+
+.spacer_dashed {
+	border-top: 1px dashed #ccc;
+	margin: 0.5em 0;
+}
+
+.spacer_dotted {
+	border-top: 1px dotted #ccc;
+	margin: 0.5em 0;
+}
+
+.spacer_straight {
+	border-top: 1px solid #ccc;
+	margin: 0.5em 0;
 }
